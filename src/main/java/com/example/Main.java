@@ -1,6 +1,5 @@
 package com.example;
 
-import java.nio.channels.Pipe.SourceChannel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,13 +28,16 @@ public class Main {
 
             switch (usuarioSeleccionado) {
                 case 1:
-                    Anonimo();
+                    anonimo();
                     break;
                 case 2:
-                    Otros();
+                    otros();
                     break;
                 case 3:
-                    Admin();
+                    admin();
+                    break;
+                case 4:
+                    System.out.println("Saliendo...");
                     break;
 
                 default:
@@ -52,7 +54,7 @@ public class Main {
 
     }
 
-    public static void Admin() {
+    public static void admin() {
 
         Scanner tareas = new Scanner(System.in);
         boolean accesoCorrecto = false;
@@ -116,7 +118,7 @@ public class Main {
         }
     }
 
-    public static void Anonimo() {
+    public static void anonimo() {
         Scanner scanner = new Scanner(System.in);
         // Creamos una lista de tipo ArrayList
         ArrayList<String> listaEntradas = new ArrayList<>();
@@ -184,7 +186,7 @@ public class Main {
 
     }
 
-    public static void Otros() {
+    public static void otros() {
 
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> listaEntradas = new ArrayList<>();
