@@ -4,58 +4,89 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    static final String USER = "user";
-    static final String PASSWORD = "password";
+    static ArrayList<String> peticionesDetalles = new ArrayList<>();
+    static ArrayList<String> quejasDetalles = new ArrayList<>();
+    static ArrayList<String> reclamosDetalles = new ArrayList<>();
+    static ArrayList<String> sugerenciasDetalles = new ArrayList<>();
+    static ArrayList<String> felicitacionesDetalles = new ArrayList<>();
 
     public static void main(String[] args) {
+        seleccionSede();
 
-        Scanner sede = new Scanner(System.in);
-        System.out.println("\nSelecione la  sede a la cual desea realizar su PQRSF");
-        System.out.println("1.Sede Bello");
-        System.out.println("2. Otras Sedes");
-
-        int eleccion = sede.nextInt();
-        sede.nextLine();
-
-        if (eleccion == 1) {
-            System.out.println("\nSelecione tipo de usuario");
-            System.out.println("1. Anonimo");
-            System.out.println("2. Otros");
-            System.out.println("3. Administrador");
-            System.out.println("4. Salir");
-            int usuarioSeleccionado = sede.nextInt();
-            sede.nextLine();
-
-            switch (usuarioSeleccionado) {
-                case 1:
-                    anonimo();
-                    break;
-                case 2:
-                    otros();
-                    break;
-                case 3:
-                    admin();
-                    break;
-                case 4:
-                    System.out.println("Saliendo...");
-                    break;
-
-                default:
-                    break;
-            }
-
-        } else if (eleccion == 2) {
-            System.out.println(
-                    "usted debe dirigirse  ala web https://forms.office.com/Pages/ResponsePage.aspx?id=ZB3r34MsSkO_IcZpbVMi7DSiM9OjpPJDuahWiTvzBQpUMktRWlU2Vk83MUo4QVJNWEFSMkhFT1ZHNiQlQCN0PWcu");
-        } else {
-            System.out.println("Seleccione una opcion valida");
-        }
-        sede.close();
+        // Inicializar las listas de PQRSF con datos
 
     }
 
-    public static void admin() {
+    static void seleccionSede() {
+        Scanner sede = new Scanner(System.in);
+        boolean salir = false;
 
+        while (!salir) {
+            System.out.println("\nSeleccione la sede a la cual desea realizar su PQRSF");
+            System.out.println("1. Sede Bello");
+            System.out.println("2. Otras Sedes");
+            System.out.println("3. Salir");
+
+            int eleccion = sede.nextInt();
+            sede.nextLine();
+
+            switch (eleccion) {
+                case 1:
+                    System.out.println("\nSeleccione tipo de usuario");
+                    System.out.println("1. Anónimo");
+                    System.out.println("2. Otros");
+                    System.out.println("3. Administrador");
+                    System.out.println("4. Volver a la selección de sede");
+
+                    int usuarioSeleccionado = sede.nextInt();
+                    sede.nextLine();
+
+                    switch (usuarioSeleccionado) {
+                        case 1:
+                            usuarioAnonimo();
+                            selecionDePQRSF();
+                            break;
+
+                        case 2:
+                            usuarioOtros();
+                            selecionDePQRSF();
+                            break;
+
+                        case 3:
+                            admin();
+                            break;
+
+                        case 4:
+                            seleccionSede();
+                            break;
+
+                        default:
+                            System.out.println("Ingrese una opción válida.");
+                            break;
+                    }
+                    break;
+
+                case 2:
+                    System.out.println(
+                            "usted debe dirigirse  ala web https://forms.office.com/Pages/ResponsePage.aspx?id=ZB3r34MsSkO_IcZpbVMi7DSiM9OjpPJDuahWiTvzBQpUMktRWlU2Vk83MUo4QVJNWEFSMkhFT1ZHNiQlQCN0PWcu");
+                    salir = true;
+                    break;
+
+                case 3:
+                    System.out.println("Saliendo del sistema...");
+                    salir = true;
+                    break;
+
+                default:
+                    System.out.println("Seleccione una opción válida.");
+                    break;
+            }
+        }
+    }
+
+    static void admin() {
+        String user = "User";
+        String password = "123456";
         Scanner tareas = new Scanner(System.in);
         boolean accesoCorrecto = false;
         int maximoIntentos = 3;
@@ -70,7 +101,7 @@ public class Main {
                 System.out.println("Ingrese contraseña");
                 String passwordTry = tareas.nextLine();
 
-                if (USER.equals(userName) && PASSWORD.equals(passwordTry)) {
+                if (user.equals(userName) && password.equals(passwordTry)) {
                     System.out.println("Acceso correcto");
                     accesoCorrecto = true;
                     break; // Salimos del for y permitimos acceder al do-while
@@ -92,10 +123,16 @@ public class Main {
                 int tarea = tareas.nextInt();
                 tareas.nextLine();
 
-                if (tarea == 1) {
-                    System.out.println("Hay PQRSF en su bandeja");
-
-                } else if (tarea == 2) {
+                switch (tarea) {
+                    case 1:
+                    // Aquí llamas a la función de validación pasando las listas correctas
+                    System.out.println("Peticiones: " + peticionesDetalles.size());
+                    System.out.println("Quejas: " + quejasDetalles.size());
+                    System.out.println("Reclamos: " + reclamosDetalles.size());
+                    System.out.println("Sugerencias: " + sugerenciasDetalles.size());
+                    System.out.println("Felicitaciones: " + felicitacionesDetalles.size());
+                        break;
+                    case 2:
                     System.out.println("\nSelecione que desea responder");
                     System.out.println("1. Peticiones");
                     System.out.println("2. Quejas");
@@ -104,181 +141,453 @@ public class Main {
                     System.out.println("5. Felicitaciones");
                     System.out.println("6. Volver");
 
-                    int responder = tareas.nextInt();
-                    tareas.nextLine();
-                } else if (tarea == 3) {
+                    int seleccion = tareas.nextInt();
+                     switch (seleccion) {
+                        case 1:
+                            
+                            break;
+                            case 2:
+                            
+                            break;
+                            case 3:
+                            
+                            break;
+                            case 4:
+                            
+                            break;
+                            case 5:
+                            
+                            break;
+                            case 6:
+                            
+                            break;
+                            
+                            
+                            
+                     
+                        default:
+                        System.out.println("Ingrese una opcion valida. ");
+                            break;
+                     }
+                    break;
+
+                    case 3:
                     System.out.println("Saliendo del sistema");
+                    seleccionSede();
                     break;
-                } else {
+                    default:
                     System.out.println("Ingrese una opcion valida. ");
+                        break;
                 }
+                    
             } while (true);
-
-            tareas.close();
         }
     }
 
-    public static void anonimo() {
-        Scanner scanner = new Scanner(System.in);
-        // Creamos una lista de tipo ArrayList
-        ArrayList<String> listaEntradas = new ArrayList<>();
-        String telefono;
+    //////////////////////////////////////////////////////////////////////////
+
+    // Inicio de la creacion de los metodos de usuarios
+
+    static ArrayList<String> usuarioAnonimo() {
+
+        // Creamos un Arraylist para elingreso de datos del usuario
+        ArrayList<String> datosAnonimo = new ArrayList<>();
+
+        Scanner scanner = new Scanner(System.in); // se crea el escanar para tomar los datos deingreso
+
+        // Se solicita dos metodo de contacto
+        System.out.println("\n Porfavor ingrese  metodos de contacto:");
+
         String correo;
-        String salida;
-        String tipoPQRSF;
-        String descripcionPQRSF;
-        int terminos;
-        // while (!opcionValida) quiere decir que el bucle while se ejecutará mientras
-        // opcionValida sea falso.
-        boolean opcionValida = false;
-        while (!opcionValida) {
-            System.out.println("\nAcepta el manejo de la politica de datos?");
-            System.out.println("1.Si");
-            System.out.println("2.No");
-            terminos = scanner.nextInt();
-            scanner.nextLine();
-            switch (terminos) {
-                case 1:
-                    // este opcionValida = true hace que salgamos del while (!opcionValida) ya que
-                    // deja de ser falso
-                    opcionValida = true;
-                    while (true) {
-                        System.out.print("Ingrese su correo: ");
-                        correo = scanner.nextLine();
-                        System.out.print("Ingrese su telefono: ");
-                        telefono = scanner.nextLine();
-                        System.out.println("\nSeleccione el tipo de PQRSF");
-                        System.out.println("----------------------------------");
-                        System.out.println("Peticiones");
-                        System.out.println("Quejas");
-                        System.out.println("Reclamos");
-                        System.out.println("Sugerencias");
-                        System.out.println("Felicitaciones");
-                        System.out.println("----------------------------------");
-                        tipoPQRSF = scanner.nextLine();
-                        System.out.println("Descripcion de la PQRSF");
-                        descripcionPQRSF = scanner.nextLine();
-                        // Agrega elementos a la lista usando el método .add
-                        listaEntradas
-                                .add("correo: " + correo + " \ntelefono: " + telefono + " \nTipo de PQRSF: " + tipoPQRSF
-                                        + " \nDescripcion de la PQRSF: " + descripcionPQRSF);
-                        System.out.println("Ingrese salir para terminar");
-                        salida = scanner.nextLine();
-                        if (salida.equalsIgnoreCase("salir")) {
-                            break;
-                        }
-                    }
-                    scanner.close();
-                    System.out.println("Informacion Ingresada:");
-                    // Muestra el contenido de la lista
-                    for (String texto : listaEntradas) {
-                        System.out.println(texto);
-                    }
-                    break;
-                case 2:
-                    System.out.println("no es posible continuar con la PQRSF");
-                    break;
-                default:
-                    System.out.println("Opcion no valida");
-                    break;
+        while (true) {
+            System.out.print("Correo: ");
+            correo = scanner.nextLine(); // se toman datos ingresados
+            try {
+                validarEmail(correo);
+                System.out.println("El correo electrónico es válido.");
+                break; // Salir del bucle si el correo es válido
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage() + ". Inténtalo nuevamente.");
             }
         }
 
+        // se agrega el correo a la lista una vez validado
+        datosAnonimo.add(correo);
+
+        // se solicita el ingreso de un numero de telefono valido que se verfica con el
+        // metodo validar numero
+        String telefono;
+
+        while (true) {
+            System.out.println("Teléfono: ");
+            telefono = scanner.nextLine();
+            try {
+                validarNumero(telefono);
+                System.out.println("El número ingresado es válido.");
+                break; // Salir del bucle si el número es válido
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage() + ". Inténtalo nuevamente.");
+            }
+        }
+        datosAnonimo.add(telefono);
+        return datosAnonimo;
     }
 
-    public static void otros() {
+    static ArrayList<String> usuarioOtros() {
 
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<String> listaEntradas = new ArrayList<>();
+        // Creamos un Arraylist para elingreso de datos del usuario
+        ArrayList<String> datosOtros = new ArrayList<>();
 
-        // Vriabes asignadas a las entradas.
-        String nombre;
-        String usuario;
+        Scanner scanner = new Scanner(System.in); // se crea el escanar para tomar los datos deingreso
+
+        System.out.println("\nPor favor selecione su tipo de usuario");
+        System.out.println("1. Estudiante ");
+        System.out.println("2. Egresado ");
+        System.out.println("3. Docente");
+        System.out.println("4. Visitantes u Otros ");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (opcion) {
+            case 1, 2, 3, 4:
+                System.out.println("Ingrese su nombre completo por favor: ");
+                String nombre = scanner.nextLine();
+                datosOtros.add(nombre);
+                break;
+
+            default:
+                System.out.println("Por favor seleccione una opción valida. ");
+                break;
+        }
+
+        // Se solicita dos metodo de contacto
+        System.out.println("\n Porfavor ingrese  metodos de contacto:");
+
         String correo;
-        String telefono;
-        String salida;
-        String tipoPQRSF;
-        String descripcionPQRSF;
-        int terminos;
-        boolean opcionValida = false;
-
-        while (!opcionValida) {
-
-            System.out.println("\nAcepta el manejo de la política de datos?");
-            System.out.println("1. Sí");
-            System.out.println("2. No");
-            terminos = scanner.nextInt();
-            scanner.nextLine(); // Consumir la nueva línea después de nextInt()
-
-            // Entrada de datos usuario en el formuaio.
-
-            switch (terminos) {
-                case 1:
-                    opcionValida = true;
-                    while (true) {
-
-                        System.out.print("Nombre: ");
-                        nombre = scanner.nextLine();
-
-                        System.out.print("Usuario: ");
-                        usuario = scanner.nextLine();
-
-                        System.out.print("Ingrese su correo: ");
-                        correo = scanner.nextLine();
-
-                        System.out.print("Ingrese su teléfono: ");
-
-                        telefono = scanner.nextLine();
-
-                        System.out.println("\nSeleccione el tipo de PQRSF");
-                        System.out.println("----------------------------------");
-                        System.out.println("Peticiones");
-                        System.out.println("Quejas");
-                        System.out.println("Reclamos");
-                        System.out.println("Sugerencias");
-                        System.out.println("Felicitaciones");
-                        System.out.println("----------------------------------");
-                        tipoPQRSF = scanner.nextLine();
-
-                        System.out.println("Descripción de la PQRSF:");
-                        descripcionPQRSF = scanner.nextLine();
-
-                        listaEntradas.add("Nombre: " + nombre +
-                                "\nUsuario: " + usuario +
-                                "\nCorreo: " + correo +
-                                "\nTeléfono: " + telefono +
-                                "\nTipo de PQRSF: " + tipoPQRSF +
-                                "\nDescripción de la PQRSF: " + descripcionPQRSF);
-
-                        System.out.println("Ingrese 'salir' para terminar o presione Enter para continuar.");
-
-                        salida = scanner.nextLine();
-
-                        if (salida.equalsIgnoreCase("salir")) {
-                            break;
-                        }
-
-                    }
-
-                    System.out.println("\nInformacion Ingresada:");
-
-                    for (String texto : listaEntradas) {
-                        System.out.println(texto);
-                    }
-                    break;
-
-                case 2:
-
-                    System.out.println("No es posible continuar con la PQRSF.");
-                    break;
-
-                default:
-                    System.out.println("Opción no válida. Inténtelo de nuevo.");
-                    break;
+        while (true) {
+            System.out.print("Correo: ");
+            correo = scanner.nextLine(); // se toman datos ingresados
+            try {
+                validarEmail(correo);
+                System.out.println("El correo electrónico es válido.");
+                break; // Salir del bucle si el correo es válido
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage() + ". Inténtalo nuevamente.");
             }
         }
 
+        // se agrega el correo a la lista una vez validado
+        datosOtros.add(correo);
+
+        // se solicita el ingreso de un numero de telefono valido que se verfica con el
+        // metodo validar numero
+        String telefono;
+
+        while (true) {
+            System.out.println("Teléfono: ");
+            telefono = scanner.nextLine();
+            try {
+                validarNumero(telefono);
+                System.out.println("El número ingresado es válido.");
+                break; // Salir del bucle si el número es válido
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage() + ". Inténtalo nuevamente.");
+            }
+        }
+        datosOtros.add(telefono);
+        return datosOtros;
+    }
+
+    ////////////////////////////////////////////////////////////////////
+
+    // metodos de validacionde correo y numeros ingresados
+
+    /*
+     * throw es una instrucción que lanza una excepción, interrumpiendo el flujo
+     * normal del programa en ese punto.
+     * new IllegalArgumentException(...) crea una nueva instancia de la clase
+     * IllegalArgumentException, una excepción que indica que un argumento
+     * proporcionado a un método es inválido.
+     */
+
+    static void validarEmail(String correo) {
+        if (!correo.contains("@")) {
+            throw new IllegalArgumentException("El correo electrónico debe contener '@'.");
+        }
+    }
+
+    /*
+     * throw es una instrucción que lanza una excepción, interrumpiendo el flujo
+     * normal del programa en ese punto.
+     * new IllegalArgumentException(...) crea una nueva instancia de la clase
+     * IllegalArgumentException, una excepción que indica que un argumento
+     * proporcionado a un método es inválido.
+     * El mensaje "El String debe contener al menos 10 dígitos." se incluye como
+     * argumento del constructor. Este mensaje se usa para describir el error, de
+     * modo que, si se lanza la excepción, el programa mostrará este mensaje de
+     * error.
+     */
+    static void validarNumero(String telefono) {
+        // Verificar si el String contiene solo dígitos y tiene al menos 10 caracteres
+        if (!telefono.matches("\\d+")) {
+            throw new IllegalArgumentException("El telefono contiene letras o caracteres no numéricos.");
+        }
+        if (telefono.length() < 10) {
+            throw new IllegalArgumentException("El telefono debe contener al menos 10 dígitos.");
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    // metodo de seleccion de PQRSF
+    static void selecionDePQRSF() {
+        Scanner scanner = new Scanner(System.in);
+
+        // se cre elmenu con las diferentes opciones
+
+        System.out.println("\nSeleccione el tipo de PQRSF");
+        System.out.println("----------------------------------");
+        System.out.println("1. Peticiones ");
+        System.out.println("2. Quejas ");
+        System.out.println("3. Reclamos");
+        System.out.println("4. Sugerencias");
+        System.out.println("5. Felicitaciones");
+        System.out.println("----------------------------------");
+
+        int opcion = scanner.nextInt();
+        scanner.nextLine(); // para limpiar el ingreso del scanner
+
+        // secrea un switch que contiene cada uno de los metodos dependiendo la opcion
+        // se llama al metodo correspondiente
+
+        switch (opcion) {
+            case 1:
+                peticiones();
+                break;
+
+            case 2:
+                quejas();
+                break;
+
+            case 3:
+                reclamos();
+                break;
+
+            case 4:
+                sugerencias();
+                break;
+
+            case 5:
+                felicitaciones();
+                break;
+
+            default:
+                System.out.println("Ingrese  una opcion valida. ");
+                break;
+        }
         scanner.close();
 
+    }
+
+    /////////////////////////////////////////////////////////////////////////////
+    // secrea cada uno de los metodos co su respectivo arrayslist
+
+    static void peticiones() {
+        Scanner scanner = new Scanner(System.in);
+
+        // Solicitar detalles para la petición y almacenarlos en la lista estática
+        System.out.println("Por favor ingrese los detalles de su petición: ");
+        String detalles = scanner.nextLine();
+
+        peticionesDetalles.add(detalles); // Agregar directamente a la lista estática
+
+        cierre(); // método de cierre
+    }
+
+    static void quejas() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Por favor ingrese los detalles de su queja: ");
+        String detalles = scanner.nextLine();
+
+        quejasDetalles.add(detalles); // Agregar directamente a la lista estática
+
+        cierre(); // método de cierre
+    }
+
+    static void reclamos() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Por favor ingrese los detalles de su reclamo: ");
+        String detalles = scanner.nextLine();
+
+        reclamosDetalles.add(detalles); // Agregar directamente a la lista estática
+
+        cierre(); // método de cierre
+    }
+
+    static void sugerencias() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Por favor ingrese los detalles de su sugerencia: ");
+        String detalles = scanner.nextLine();
+
+        sugerenciasDetalles.add(detalles); // Agregar directamente a la lista estática
+
+        cierre(); // método de cierre
+    }
+
+    static void felicitaciones() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Por favor ingrese los detalles de su felicitación: ");
+        String detalles = scanner.nextLine();
+
+        felicitacionesDetalles.add(detalles); // Agregar directamente a la lista estática
+
+        cierre(); // método de cierre
+    }
+
+    // fin de los metodos correspondientes a PQRSF
+    ///////////////////////////////////////////////////////////////
+
+    // Secre un metodo cierre que finaliza o da la opcion de continuar con otra
+    // PQRSF
+
+    static void cierre() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n¿Desea ingresar otra PQRSF?");
+        System.out.println("1. Si ");
+        System.out.println("2. No ");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (opcion) {
+            case 1:
+                seleccionSede();
+                break;
+
+            case 2:
+
+                System.out.println(
+                        "Gracias por  suministra la informacion  necesaria para atender  su inquietus sera notificado  tanpronto como sea posible  a los metodos de contacto suministrados. ");
+
+                break;
+            default:
+                System.out.println("Ingrese  una opcion valida. ");
+                break;
+        }
+        scanner.close();
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Incio de metods de tareas del Administrador
+    // Método para validar PQRSF y mostrar los tamaños de las listas.
+    static void validarPQRSF(ArrayList<String> peticiones, ArrayList<String> quejas,
+            ArrayList<String> reclamos, ArrayList<String> sugerencias,
+            ArrayList<String> felicitaciones) {
+
+        // Muestra el tamaño de las listas sin pedir más detalles.
+        System.out.println("Peticiones: " + peticiones.size() + " elementos.");
+        System.out.println("Quejas: " + quejas.size() + " elementos.");
+        System.out.println("Reclamos: " + reclamos.size() + " elementos.");
+        System.out.println("Sugerencias: " + sugerencias.size() + " elementos.");
+        System.out.println("Felicitaciones: " + felicitaciones.size() + " elementos.");
+    }
+
+    static void responderPeticiones(ArrayList<String> peticiones,  ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros) {
+        System.out.println("Contenido de Peticiones:");
+        for (String peticion : peticiones) {
+            System.out.println("- " + peticion);
+        }
+        System.out.println("\nContenido de Usuarios Anónimos:");
+        for (String anonimo : usuarioAnonimo) {
+            System.out.println("- " + anonimo);
+        }
+
+        System.out.println("\nContenido de Otros Usuarios:");
+        for (String otroUsuario : usuarioOtros) {
+            System.out.println("- " + otroUsuario);
+        }
+    }
+
+
+    static void responderQuejas(ArrayList<String> quejas,ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros
+    ){
+        System.out.println("\nContenido de Quejas:");
+        for (String queja : quejas) {
+            System.out.println("- " + queja);
+        }
+        System.out.println("\nContenido de Usuarios Anónimos:");
+        for (String anonimo : usuarioAnonimo) {
+            System.out.println("- " + anonimo);
+        }
+
+        System.out.println("\nContenido de Otros Usuarios:");
+        for (String otroUsuario : usuarioOtros) {
+            System.out.println("- " + otroUsuario);
+        }
+    }
+
+    static void responderReclamos(ArrayList<String> reclamos,ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros){
+        System.out.println("\nContenido de Reclamos:");
+        for (String reclamo : reclamos) {
+            System.out.println("- " + reclamo);
+        }
+        System.out.println("\nContenido de Usuarios Anónimos:");
+        for (String anonimo : usuarioAnonimo) {
+            System.out.println("- " + anonimo);
+        }
+
+        System.out.println("\nContenido de Otros Usuarios:");
+        for (String otroUsuario : usuarioOtros) {
+            System.out.println("- " + otroUsuario);
+        }
+
+    }
+
+    static void responderSugerencion(ArrayList<String> sugerencias,ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros){
+        System.out.println("\nContenido de Sugerencias:");
+        for (String sugerencia : sugerencias) {
+            System.out.println("- " + sugerencia);
+        }
+        System.out.println("\nContenido de Usuarios Anónimos:");
+        for (String anonimo : usuarioAnonimo) {
+            System.out.println("- " + anonimo);
+        }
+
+        System.out.println("\nContenido de Otros Usuarios:");
+        for (String otroUsuario : usuarioOtros) {
+            System.out.println("- " + otroUsuario);
+        }
+    }
+
+    static void responderFelicitaciones(ArrayList<String> felicitaciones,ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros){
+        System.out.println("\nContenido de Felicitaciones:");
+        for (String felicitacion : felicitaciones) {
+            System.out.println("- " + felicitacion);
+        }
+        System.out.println("\nContenido de Usuarios Anónimos:");
+        for (String anonimo : usuarioAnonimo) {
+            System.out.println("- " + anonimo);
+        }
+
+        System.out.println("\nContenido de Otros Usuarios:");
+        for (String otroUsuario : usuarioOtros) {
+            System.out.println("- " + otroUsuario);
+        }
+    }
+        
+
+    // imprimir los datos del usurio
+    static void usersDatos(ArrayList<String> datosAnonimo, ArrayList<String> datosOtros) {
+        // Imprimir datos de los usuarios anónimos
+        System.out.println("Datos de los usuarios anónimos:");
+        for (String dato : datosAnonimo) {
+            System.out.println(dato);
+        }
+
+        // Imprimir datos de los otros usuarios
+        System.out.println("Datos de los otros usuarios:");
+        for (String dato : datosOtros) {
+            System.out.println(dato);
+        }
     }
 }
