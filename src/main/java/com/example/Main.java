@@ -9,6 +9,8 @@ public class Main {
     static ArrayList<String> reclamosDetalles = new ArrayList<>();
     static ArrayList<String> sugerenciasDetalles = new ArrayList<>();
     static ArrayList<String> felicitacionesDetalles = new ArrayList<>();
+    static ArrayList<String> usuarioAnonimo = new ArrayList<>();
+    static ArrayList<String> usuarioOtros = new ArrayList<>();
 
     public static void main(String[] args) {
         seleccionSede();
@@ -125,61 +127,118 @@ public class Main {
 
                 switch (tarea) {
                     case 1:
-                    // Aquí llamas a la función de validación pasando las listas correctas
-                    System.out.println("Peticiones: " + peticionesDetalles.size());
-                    System.out.println("Quejas: " + quejasDetalles.size());
-                    System.out.println("Reclamos: " + reclamosDetalles.size());
-                    System.out.println("Sugerencias: " + sugerenciasDetalles.size());
-                    System.out.println("Felicitaciones: " + felicitacionesDetalles.size());
+                        // Aquí llamas a la función de validación pasando las listas correctas
+                        System.out.println("Peticiones: " + peticionesDetalles.size());
+                        System.out.println("Quejas: " + quejasDetalles.size());
+                        System.out.println("Reclamos: " + reclamosDetalles.size());
+                        System.out.println("Sugerencias: " + sugerenciasDetalles.size());
+                        System.out.println("Felicitaciones: " + felicitacionesDetalles.size());
                         break;
                     case 2:
-                    System.out.println("\nSelecione que desea responder");
-                    System.out.println("1. Peticiones");
-                    System.out.println("2. Quejas");
-                    System.out.println("3. Reclamos");
-                    System.out.println("4. Sugerencias");
-                    System.out.println("5. Felicitaciones");
-                    System.out.println("6. Volver");
+                        System.out.println("\nSelecione que desea responder");
+                        System.out.println("1. Peticiones");
+                        System.out.println("2. Quejas");
+                        System.out.println("3. Reclamos");
+                        System.out.println("4. Sugerencias");
+                        System.out.println("5. Felicitaciones");
+                        System.out.println("6. Volver");
 
-                    int seleccion = tareas.nextInt();
-                     switch (seleccion) {
-                        case 1:
-                            
-                            break;
+                        int seleccion = tareas.nextInt();
+
+                        switch (seleccion) {
+                            case 1:
+                                System.out.println("\nContenido de Usuarios Anónimos:");
+                                for (String anonimo : usuarioAnonimo) {
+                                    System.out.println("- " + anonimo);
+                                }
+
+                                System.out.println("Contenido de Peticiones:");
+                                for (String peticion : peticionesDetalles) {
+                                    System.out.println("- " + peticion);
+                                }
+
+                                break;
                             case 2:
-                            
-                            break;
+                                System.out.println("\nContenido de Usuarios Anónimos:");
+                                for (String anonimo : usuarioAnonimo) {
+                                    System.out.println("- " + anonimo);
+                                }
+
+                                System.out.println("\nContenido de Quejas:");
+                                for (String queja : quejasDetalles) {
+                                    System.out.println("- " + queja);
+                                }
+
+                                break;
                             case 3:
-                            
-                            break;
+                                System.out.println("\nContenido de Usuarios Anónimos:");
+                                for (String anonimo : usuarioAnonimo) {
+                                    System.out.println("- " + anonimo);
+                                }
+
+                                System.out.println("\nContenido de Otros Usuarios:");
+                                for (String otroUsuario : usuarioOtros) {
+                                    System.out.println("- " + otroUsuario);
+                                }
+
+                                System.out.println("\nContenido de Reclamos:");
+                                for (String reclamo : reclamosDetalles) {
+                                    System.out.println("- " + reclamo);
+                                }
+
+                                break;
                             case 4:
-                            
-                            break;
+                                System.out.println("\nContenido de Usuarios Anónimos:");
+                                for (String anonimo : usuarioAnonimo) {
+                                    System.out.println("- " + anonimo);
+                                }
+
+                                System.out.println("\nContenido de Otros Usuarios:");
+                                for (String otroUsuario : usuarioOtros) {
+                                    System.out.println("- " + otroUsuario);
+                                }
+
+                                System.out.println("\nContenido de Sugerencias:");
+                                for (String sugerencia : sugerenciasDetalles) {
+                                    System.out.println("- " + sugerencia);
+                                }
+
+                                break;
                             case 5:
-                            
-                            break;
+                                System.out.println("\nContenido de Usuarios Anónimos:");
+                                for (String anonimo : usuarioAnonimo) {
+                                    System.out.println("- " + anonimo);
+                                }
+
+                                System.out.println("\nContenido de Otros Usuarios:");
+                                for (String otroUsuario : usuarioOtros) {
+                                    System.out.println("- " + otroUsuario);
+                                }
+
+                                System.out.println("\nContenido de Felicitaciones:");
+                                for (String felicitacion : felicitacionesDetalles) {
+                                    System.out.println("- " + felicitacion);
+                                }
+
+                                break;
+
                             case 6:
-                            
-                            break;
-                            
-                            
-                            
-                     
-                        default:
-                        System.out.println("Ingrese una opcion valida. ");
-                            break;
-                     }
-                    break;
+                                break; // Volver al menú anterior
+                            default:
+                                System.out.println("Ingrese una opcion valida. ");
+                                break;
+                        }
+                        break;
 
                     case 3:
-                    System.out.println("Saliendo del sistema");
-                    seleccionSede();
-                    break;
+                        System.out.println("Saliendo del sistema");
+                        seleccionSede();
+                        break;
                     default:
-                    System.out.println("Ingrese una opcion valida. ");
+                        System.out.println("Ingrese una opcion valida. ");
                         break;
                 }
-                    
+
             } while (true);
         }
     }
@@ -188,7 +247,7 @@ public class Main {
 
     // Inicio de la creacion de los metodos de usuarios
 
-    static ArrayList<String> usuarioAnonimo() {
+    static void usuarioAnonimo() {
 
         // Creamos un Arraylist para elingreso de datos del usuario
         ArrayList<String> datosAnonimo = new ArrayList<>();
@@ -212,7 +271,7 @@ public class Main {
         }
 
         // se agrega el correo a la lista una vez validado
-        datosAnonimo.add(correo);
+        usuarioAnonimo.add(correo);
 
         // se solicita el ingreso de un numero de telefono valido que se verfica con el
         // metodo validar numero
@@ -229,11 +288,11 @@ public class Main {
                 System.out.println("Error: " + e.getMessage() + ". Inténtalo nuevamente.");
             }
         }
-        datosAnonimo.add(telefono);
-        return datosAnonimo;
+        usuarioAnonimo.add(telefono);
+
     }
 
-    static ArrayList<String> usuarioOtros() {
+    static void usuarioOtros() {
 
         // Creamos un Arraylist para elingreso de datos del usuario
         ArrayList<String> datosOtros = new ArrayList<>();
@@ -277,7 +336,7 @@ public class Main {
         }
 
         // se agrega el correo a la lista una vez validado
-        datosOtros.add(correo);
+        usuarioOtros.add(correo);
 
         // se solicita el ingreso de un numero de telefono valido que se verfica con el
         // metodo validar numero
@@ -294,8 +353,8 @@ public class Main {
                 System.out.println("Error: " + e.getMessage() + ". Inténtalo nuevamente.");
             }
         }
-        datosOtros.add(telefono);
-        return datosOtros;
+        usuarioOtros.add(telefono);
+
     }
 
     ////////////////////////////////////////////////////////////////////
@@ -492,102 +551,4 @@ public class Main {
         System.out.println("Felicitaciones: " + felicitaciones.size() + " elementos.");
     }
 
-    static void responderPeticiones(ArrayList<String> peticiones,  ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros) {
-        System.out.println("Contenido de Peticiones:");
-        for (String peticion : peticiones) {
-            System.out.println("- " + peticion);
-        }
-        System.out.println("\nContenido de Usuarios Anónimos:");
-        for (String anonimo : usuarioAnonimo) {
-            System.out.println("- " + anonimo);
-        }
-
-        System.out.println("\nContenido de Otros Usuarios:");
-        for (String otroUsuario : usuarioOtros) {
-            System.out.println("- " + otroUsuario);
-        }
-    }
-
-
-    static void responderQuejas(ArrayList<String> quejas,ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros
-    ){
-        System.out.println("\nContenido de Quejas:");
-        for (String queja : quejas) {
-            System.out.println("- " + queja);
-        }
-        System.out.println("\nContenido de Usuarios Anónimos:");
-        for (String anonimo : usuarioAnonimo) {
-            System.out.println("- " + anonimo);
-        }
-
-        System.out.println("\nContenido de Otros Usuarios:");
-        for (String otroUsuario : usuarioOtros) {
-            System.out.println("- " + otroUsuario);
-        }
-    }
-
-    static void responderReclamos(ArrayList<String> reclamos,ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros){
-        System.out.println("\nContenido de Reclamos:");
-        for (String reclamo : reclamos) {
-            System.out.println("- " + reclamo);
-        }
-        System.out.println("\nContenido de Usuarios Anónimos:");
-        for (String anonimo : usuarioAnonimo) {
-            System.out.println("- " + anonimo);
-        }
-
-        System.out.println("\nContenido de Otros Usuarios:");
-        for (String otroUsuario : usuarioOtros) {
-            System.out.println("- " + otroUsuario);
-        }
-
-    }
-
-    static void responderSugerencion(ArrayList<String> sugerencias,ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros){
-        System.out.println("\nContenido de Sugerencias:");
-        for (String sugerencia : sugerencias) {
-            System.out.println("- " + sugerencia);
-        }
-        System.out.println("\nContenido de Usuarios Anónimos:");
-        for (String anonimo : usuarioAnonimo) {
-            System.out.println("- " + anonimo);
-        }
-
-        System.out.println("\nContenido de Otros Usuarios:");
-        for (String otroUsuario : usuarioOtros) {
-            System.out.println("- " + otroUsuario);
-        }
-    }
-
-    static void responderFelicitaciones(ArrayList<String> felicitaciones,ArrayList<String> usuarioAnonimo, ArrayList<String> usuarioOtros){
-        System.out.println("\nContenido de Felicitaciones:");
-        for (String felicitacion : felicitaciones) {
-            System.out.println("- " + felicitacion);
-        }
-        System.out.println("\nContenido de Usuarios Anónimos:");
-        for (String anonimo : usuarioAnonimo) {
-            System.out.println("- " + anonimo);
-        }
-
-        System.out.println("\nContenido de Otros Usuarios:");
-        for (String otroUsuario : usuarioOtros) {
-            System.out.println("- " + otroUsuario);
-        }
-    }
-        
-
-    // imprimir los datos del usurio
-    static void usersDatos(ArrayList<String> datosAnonimo, ArrayList<String> datosOtros) {
-        // Imprimir datos de los usuarios anónimos
-        System.out.println("Datos de los usuarios anónimos:");
-        for (String dato : datosAnonimo) {
-            System.out.println(dato);
-        }
-
-        // Imprimir datos de los otros usuarios
-        System.out.println("Datos de los otros usuarios:");
-        for (String dato : datosOtros) {
-            System.out.println(dato);
-        }
-    }
 }
