@@ -15,8 +15,6 @@ public class Main {
     public static void main(String[] args) {
         seleccionSede();
 
-        // Inicializar las listas de PQRSF con datos
-
     }
 
     static void seleccionSede() {
@@ -45,11 +43,13 @@ public class Main {
 
                     switch (usuarioSeleccionado) {
                         case 1:
+                            acpetacionManejosDeDatos();
                             usuarioAnonimo();
                             selecionDePQRSF();
                             break;
 
                         case 2:
+                            acpetacionManejosDeDatos();
                             usuarioOtros();
                             selecionDePQRSF();
                             break;
@@ -70,13 +70,13 @@ public class Main {
 
                 case 2:
                     System.out.println(
-                            "usted debe dirigirse  ala web https://forms.office.com/Pages/ResponsePage.aspx?id=ZB3r34MsSkO_IcZpbVMi7DSiM9OjpPJDuahWiTvzBQpUMktRWlU2Vk83MUo4QVJNWEFSMkhFT1ZHNiQlQCN0PWcu");
-                    salir = true;
+                            "usted debe dirigirse  a la web https://forms.office.com/Pages/ResponsePage.aspx?id=ZB3r34MsSkO_IcZpbVMi7DSiM9OjpPJDuahWiTvzBQpUMktRWlU2Vk83MUo4QVJNWEFSMkhFT1ZHNiQlQCN0PWcu");
+
                     break;
 
                 case 3:
                     System.out.println("Saliendo del sistema...");
-                    salir = true;
+
                     break;
 
                 default:
@@ -121,116 +121,28 @@ public class Main {
                 System.out.println("\nElija su tarea");
                 System.out.println("1. Validar PQRSF");
                 System.out.println("2. Responder PQRSF");
-                System.out.println("3. Salir");
+                System.out.println("3. Eliminar PQRSF");
+                System.out.println("4. Salir");
                 int tarea = tareas.nextInt();
                 tareas.nextLine();
 
                 switch (tarea) {
                     case 1:
                         // Aquí llamas a la función de validación pasando las listas correctas
-                        System.out.println("Peticiones: " + peticionesDetalles.size());
-                        System.out.println("Quejas: " + quejasDetalles.size());
-                        System.out.println("Reclamos: " + reclamosDetalles.size());
-                        System.out.println("Sugerencias: " + sugerenciasDetalles.size());
-                        System.out.println("Felicitaciones: " + felicitacionesDetalles.size());
+                        validarPQRSF(peticionesDetalles, quejasDetalles, reclamosDetalles, sugerenciasDetalles,
+                                felicitacionesDetalles);
+
                         break;
                     case 2:
-                        System.out.println("\nSelecione que desea responder");
-                        System.out.println("1. Peticiones");
-                        System.out.println("2. Quejas");
-                        System.out.println("3. Reclamos");
-                        System.out.println("4. Sugerencias");
-                        System.out.println("5. Felicitaciones");
-                        System.out.println("6. Volver");
+                        responderPQRSF(peticionesDetalles, quejasDetalles, reclamosDetalles, sugerenciasDetalles,
+                                felicitacionesDetalles, usuarioAnonimo, usuarioOtros);
 
-                        int seleccion = tareas.nextInt();
-
-                        switch (seleccion) {
-                            case 1:
-                                System.out.println("\nContenido de Usuarios Anónimos:");
-                                for (String anonimo : usuarioAnonimo) {
-                                    System.out.println("- " + anonimo);
-                                }
-
-                                System.out.println("Contenido de Peticiones:");
-                                for (String peticion : peticionesDetalles) {
-                                    System.out.println("- " + peticion);
-                                }
-
-                                break;
-                            case 2:
-                                System.out.println("\nContenido de Usuarios Anónimos:");
-                                for (String anonimo : usuarioAnonimo) {
-                                    System.out.println("- " + anonimo);
-                                }
-
-                                System.out.println("\nContenido de Quejas:");
-                                for (String queja : quejasDetalles) {
-                                    System.out.println("- " + queja);
-                                }
-
-                                break;
-                            case 3:
-                                System.out.println("\nContenido de Usuarios Anónimos:");
-                                for (String anonimo : usuarioAnonimo) {
-                                    System.out.println("- " + anonimo);
-                                }
-
-                                System.out.println("\nContenido de Otros Usuarios:");
-                                for (String otroUsuario : usuarioOtros) {
-                                    System.out.println("- " + otroUsuario);
-                                }
-
-                                System.out.println("\nContenido de Reclamos:");
-                                for (String reclamo : reclamosDetalles) {
-                                    System.out.println("- " + reclamo);
-                                }
-
-                                break;
-                            case 4:
-                                System.out.println("\nContenido de Usuarios Anónimos:");
-                                for (String anonimo : usuarioAnonimo) {
-                                    System.out.println("- " + anonimo);
-                                }
-
-                                System.out.println("\nContenido de Otros Usuarios:");
-                                for (String otroUsuario : usuarioOtros) {
-                                    System.out.println("- " + otroUsuario);
-                                }
-
-                                System.out.println("\nContenido de Sugerencias:");
-                                for (String sugerencia : sugerenciasDetalles) {
-                                    System.out.println("- " + sugerencia);
-                                }
-
-                                break;
-                            case 5:
-                                System.out.println("\nContenido de Usuarios Anónimos:");
-                                for (String anonimo : usuarioAnonimo) {
-                                    System.out.println("- " + anonimo);
-                                }
-
-                                System.out.println("\nContenido de Otros Usuarios:");
-                                for (String otroUsuario : usuarioOtros) {
-                                    System.out.println("- " + otroUsuario);
-                                }
-
-                                System.out.println("\nContenido de Felicitaciones:");
-                                for (String felicitacion : felicitacionesDetalles) {
-                                    System.out.println("- " + felicitacion);
-                                }
-
-                                break;
-
-                            case 6:
-                                break; // Volver al menú anterior
-                            default:
-                                System.out.println("Ingrese una opcion valida. ");
-                                break;
-                        }
                         break;
-
                     case 3:
+                        eliminarPQRSF(peticionesDetalles, quejasDetalles, reclamosDetalles, sugerenciasDetalles,
+                                felicitacionesDetalles, usuarioAnonimo, usuarioOtros);
+                        break;
+                    case 4:
                         System.out.println("Saliendo del sistema");
                         seleccionSede();
                         break;
@@ -248,9 +160,6 @@ public class Main {
     // Inicio de la creacion de los metodos de usuarios
 
     static void usuarioAnonimo() {
-
-        // Creamos un Arraylist para elingreso de datos del usuario
-        ArrayList<String> datosAnonimo = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in); // se crea el escanar para tomar los datos deingreso
 
@@ -291,11 +200,31 @@ public class Main {
         usuarioAnonimo.add(telefono);
 
     }
+    // metodo para la aceptacionde manejo de datos
+
+    static void acpetacionManejosDeDatos() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\n ¿Acepta  La politica de manejo de datos?");
+        System.out.println("1. Si");
+        System.out.println("2. No");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+
+        if (opcion == 2) {
+            System.out.println("No es posible continuar.");
+            seleccionSede();
+
+        } else if (opcion == 1) {
+            System.out.println("Por favor continue su proceso.");
+        } else {
+            System.out.println("Opcion no valida ");
+        }
+    }
+
+    // Creamos un Arraylist para elingreso de datos del usuario
 
     static void usuarioOtros() {
-
-        // Creamos un Arraylist para elingreso de datos del usuario
-        ArrayList<String> datosOtros = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in); // se crea el escanar para tomar los datos deingreso
 
@@ -311,7 +240,7 @@ public class Main {
             case 1, 2, 3, 4:
                 System.out.println("Ingrese su nombre completo por favor: ");
                 String nombre = scanner.nextLine();
-                datosOtros.add(nombre);
+                usuarioOtros.add(nombre);
                 break;
 
             default:
@@ -523,32 +452,508 @@ public class Main {
                 break;
 
             case 2:
+                System.out.println("Gracias por suministrar la información necesaria para atender su inquietud. "
+                        + "Será notificado tan pronto como sea posible a los métodos de contacto suministrados.");
 
-                System.out.println(
-                        "Gracias por  suministra la informacion  necesaria para atender  su inquietus sera notificado  tanpronto como sea posible  a los metodos de contacto suministrados. ");
+                // Mostrar información de los usuarios anónimos
+                if (!usuarioAnonimo.isEmpty()) {
+                    System.out.println("\nUsuarios Anónimos:");
+                    for (String anonimo : usuarioAnonimo) {
+                        System.out.println("Información de contacto: " + anonimo);
+                    }
+                }
 
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    System.out.println("\nOtros Usuarios:");
+                    for (String otroUsuario : usuarioOtros) {
+                        System.out.println("Información de contacto: " + otroUsuario);
+                    }
+                }
+
+                seleccionSede();
                 break;
+
             default:
-                System.out.println("Ingrese  una opcion valida. ");
+                System.out.println("Ingrese una opción válida.");
                 break;
         }
-        scanner.close();
 
+        scanner.close();
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Incio de metods de tareas del Administrador
     // Método para validar PQRSF y mostrar los tamaños de las listas.
-    static void validarPQRSF(ArrayList<String> peticiones, ArrayList<String> quejas,
-            ArrayList<String> reclamos, ArrayList<String> sugerencias,
-            ArrayList<String> felicitaciones) {
+    static void validarPQRSF(ArrayList<String> peticionesDetalles,
+            ArrayList<String> quejasDetalles,
+            ArrayList<String> reclamosDetalles,
+            ArrayList<String> sugerenciasDetalles,
+            ArrayList<String> felicitacionesDetalles) {
 
         // Muestra el tamaño de las listas sin pedir más detalles.
-        System.out.println("Peticiones: " + peticiones.size() + " elementos.");
-        System.out.println("Quejas: " + quejas.size() + " elementos.");
-        System.out.println("Reclamos: " + reclamos.size() + " elementos.");
-        System.out.println("Sugerencias: " + sugerencias.size() + " elementos.");
-        System.out.println("Felicitaciones: " + felicitaciones.size() + " elementos.");
+        System.out.println("Peticiones: " + peticionesDetalles.size() + " elementos.");
+        System.out.println("Quejas: " + quejasDetalles.size() + " elementos.");
+        System.out.println("Reclamos: " + reclamosDetalles.size() + " elementos.");
+        System.out.println("Sugerencias: " + sugerenciasDetalles.size() + " elementos.");
+        System.out.println("Felicitaciones: " + felicitacionesDetalles.size() + " elementos.");
+    }
+
+    // Responder PQRSF muestra el contenido de la PQRSF
+    static void responderPQRSF(ArrayList<String> peticionesDetalles,
+            ArrayList<String> quejasDetalles,
+            ArrayList<String> reclamosDetalles,
+            ArrayList<String> sugerenciasDetalles,
+            ArrayList<String> felicitacionesDetalles,
+            ArrayList<String> usuarioAnonimo,
+            ArrayList<String> usuarioOtros) {
+
+        System.out.println("\nSelecione que desea responder");
+        System.out.println("1. Peticiones");
+        System.out.println("2. Quejas");
+        System.out.println("3. Reclamos");
+        System.out.println("4. Sugerencias");
+        System.out.println("5. Felicitaciones");
+        System.out.println("6. Volver");
+        Scanner scanner = new Scanner(System.in);
+        int seleccion = scanner.nextInt();
+
+        switch (seleccion) {
+            case 1:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+                System.out.println("Contenido de Peticiones:");
+                for (String peticion : peticionesDetalles) {
+                    System.out.println("- " + peticion);
+                }
+
+                break;
+            case 2:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+                System.out.println("\nContenido de Quejas:");
+                for (String queja : quejasDetalles) {
+                    System.out.println("- " + queja);
+                }
+
+                break;
+            case 3:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+
+                System.out.println("\nContenido de Reclamos:");
+                for (String reclamo : reclamosDetalles) {
+                    System.out.println("- " + reclamo);
+                }
+
+                break;
+            case 4:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+
+                System.out.println("\nContenido de Sugerencias:");
+                for (String sugerencia : sugerenciasDetalles) {
+                    System.out.println("- " + sugerencia);
+                }
+
+                break;
+            case 5:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+
+                System.out.println("\nContenido de Felicitaciones:");
+                for (String felicitacion : felicitacionesDetalles) {
+                    System.out.println("- " + felicitacion);
+                }
+
+                break;
+
+            case 6:
+                break; // Volver al menú anterior
+            default:
+                System.out.println("Ingrese una opcion valida. ");
+                break;
+        }
+
+    }
+
+    // Muestra informacion de lalista con el ID y el conetinido que para ser
+    // eliminado
+    static void eliminarPQRSF(ArrayList<String> peticionesDetalles,
+            ArrayList<String> quejasDetalles,
+            ArrayList<String> reclamosDetalles,
+            ArrayList<String> sugerenciasDetalles,
+            ArrayList<String> felicitacionesDetalles,
+            ArrayList<String> usuarioAnonimo,
+            ArrayList<String> usuarioOtros) {
+
+        System.out.println("\n Por favor selecione que desea Eliminar");
+        System.out.println("1.  Peticiones");
+        System.out.println("2.  Quejas");
+        System.out.println("3.  Reclamos");
+        System.out.println("4.  Sugerencias");
+        System.out.println("5.  Felicitaciones");
+
+        Scanner scanner = new Scanner(System.in);
+
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (opcion) {
+            case 1:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+                for (int i = 0; i < peticionesDetalles.size(); i++) {
+                    System.out.println("ID: " + i + ",  Contenido:  " + peticionesDetalles.get(i));
+                }
+                procesoDeEliminacion(peticionesDetalles, quejasDetalles, reclamosDetalles, sugerenciasDetalles,
+                        felicitacionesDetalles, usuarioAnonimo, usuarioOtros);
+                break;
+            case 2:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+                for (int i = 0; i < quejasDetalles.size(); i++) {
+                    System.out.println("ID: " + i + ",  Contenido:  " + quejasDetalles.get(i));
+                }
+                procesoDeEliminacion(peticionesDetalles, quejasDetalles, reclamosDetalles, sugerenciasDetalles,
+                        felicitacionesDetalles, usuarioAnonimo, usuarioOtros);
+                break;
+            case 3:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+                for (int i = 0; i < reclamosDetalles.size(); i++) {
+                    System.out.println("ID: " + i + ",  Contenido:  " + reclamosDetalles.get(i));
+                }
+                procesoDeEliminacion(peticionesDetalles, quejasDetalles, reclamosDetalles, sugerenciasDetalles,
+                        felicitacionesDetalles, usuarioAnonimo, usuarioOtros);
+                break;
+            case 4:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+                for (int i = 0; i < sugerenciasDetalles.size(); i++) {
+                    System.out.println("ID: " + i + ",  Contenido:  " + sugerenciasDetalles.get(i));
+                }
+                procesoDeEliminacion(peticionesDetalles, quejasDetalles, reclamosDetalles, sugerenciasDetalles,
+                        felicitacionesDetalles, usuarioAnonimo, usuarioOtros);
+                break;
+            case 5:
+                if (!usuarioAnonimo.isEmpty()) {
+                    for (int i = 0; i < usuarioAnonimo.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioAnonimo.get(i));
+                    }
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    for (int i = 0; i < usuarioOtros.size(); i++) {
+                        System.out.println("ID: " + i + ",  informacion de contacto:  " + usuarioOtros.get(i));
+                    }
+                }
+
+                for (int i = 0; i < felicitacionesDetalles.size(); i++) {
+                    System.out.println("ID: " + i + ",  Contenido:  " + felicitacionesDetalles.get(i));
+                }
+                procesoDeEliminacion(peticionesDetalles, quejasDetalles, reclamosDetalles, sugerenciasDetalles,
+                        felicitacionesDetalles, usuarioAnonimo, usuarioOtros);
+                break;
+
+            default:
+                System.out.println("Opcion invalida");
+                break;
+        }
+
+    }
+
+    static void procesoDeEliminacion(ArrayList<String> peticionesDetalles,
+            ArrayList<String> quejasDetalles,
+            ArrayList<String> reclamosDetalles,
+            ArrayList<String> sugerenciasDetalles,
+            ArrayList<String> felicitacionesDetalles,
+            ArrayList<String> usuarioAnonimo,
+            ArrayList<String> usuarioOtros) {
+        System.out.println("\nPor favor espesifique que información desea eliminar: ");
+        System.out.println("1. Limpiar lista completa");
+        System.out.println("2. Eliminar solo un elemento");
+
+        Scanner scanner = new Scanner(System.in);
+        int seleccion = scanner.nextInt();
+        scanner.nextLine();
+        switch (seleccion) {
+            case 1:
+                System.out.println("\nSeleccione la PQRSF que desea limpiar por completo: ");
+                System.out.println("1.  Peticiones");
+                System.out.println("2.  Quejas");
+                System.out.println("3.  Reclamos");
+                System.out.println("4.  Sugerencias");
+                System.out.println("5.  Felicitaciones");
+                int opcion = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (opcion) {
+                    case 1:
+                        usuarioAnonimo.clear();
+                        usuarioOtros.clear();
+                        peticionesDetalles.clear(); // Vacía la lista
+                        System.out.println("Actualemente  hay: " + peticionesDetalles + usuarioAnonimo + usuarioOtros
+                                + " elemnetos en  Peticiones");
+                        break;
+                    case 2:
+                        usuarioAnonimo.clear();
+                        usuarioOtros.clear();
+                        quejasDetalles.clear(); // Vacía la lista
+                        System.out.println("Actualemente  hay: " + quejasDetalles + usuarioAnonimo + usuarioOtros
+                                + " elemnetos en  Quejas");
+                        break;
+                    case 3:
+                        usuarioAnonimo.clear();
+                        usuarioOtros.clear();
+                        reclamosDetalles.clear(); // Vacía la lista
+                        System.out.println("Actualemente  hay: " + reclamosDetalles + usuarioAnonimo + usuarioOtros
+                                + " elemnetos en  Reclamos");
+                        break;
+                    case 4:
+                        usuarioAnonimo.clear();
+                        usuarioOtros.clear();
+                        sugerenciasDetalles.clear(); // Vacía la lista
+                        System.out.println("Actualemente  hay: " + sugerenciasDetalles + usuarioAnonimo + usuarioOtros
+                                + " elemnetos en  Sugerencias");
+                        break;
+                    case 5:
+                        usuarioAnonimo.clear();
+                        usuarioOtros.clear();
+                        felicitacionesDetalles.clear(); // Vacía la lista
+                        System.out.println(
+                                "Actualemente  hay: " + "0"
+                                        + " elemnetos en  Felcitaciones"); // Muestra
+                        // []
+                        break;
+
+                    default:
+                        System.out.println("Ingrese una  opción valida.");
+                        break;
+                }
+
+                break;
+            case 2:
+                System.out.println("\nSeleccione la PQRSF que desea eliminar contenido: ");
+                System.out.println("1.  Peticiones");
+                System.out.println("2.  Quejas");
+                System.out.println("3.  Reclamos");
+                System.out.println("4.  Sugerencias");
+                System.out.println("5.  Felicitaciones");
+                int opcion2 = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (opcion2) {
+                    case 1:
+                        eliminarElemento(peticionesDetalles, usuarioAnonimo, usuarioOtros);
+                        break;
+                    case 2:
+                        eliminarElemento(quejasDetalles, usuarioAnonimo, usuarioOtros);
+                        break;
+                    case 3:
+                        eliminarElemento(reclamosDetalles, usuarioAnonimo, usuarioOtros);
+                        break;
+                    case 4:
+                        eliminarElemento(sugerenciasDetalles, usuarioAnonimo, usuarioOtros);
+                        break;
+                    case 5:
+                        eliminarElemento(felicitacionesDetalles, usuarioAnonimo, usuarioOtros);
+                        break;
+                    default:
+                        System.out.println("Ingrese una opción válida.");
+                        break;
+                }
+                break;
+
+            default:
+                System.out.println("Ingrese una opción valida");
+                break;
+        }
+    }
+
+    static void eliminarElemento(ArrayList<String> detalles, ArrayList<String> usuarioAnonimo,
+            ArrayList<String> usuarioOtros) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nSelecione el  elemento que desea eliminar.");
+        System.out.println("1.  Correo: ");
+        System.out.println("2.   Telefono:");
+        System.out.println("3.  Correo y Telefono:");
+        System.out.println("4.  Contenido:");
+
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+        String objetoEliminado;
+
+        switch (opcion) {
+            case 1:
+
+                if (!usuarioAnonimo.isEmpty()) {
+                    System.out.println("Ingrese el correo que desea eliminar: ");
+                    objetoEliminado = scanner.nextLine();
+                    usuarioAnonimo.remove(objetoEliminado);
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    System.out.println("Ingrese el correo que desea eliminar: ");
+                    objetoEliminado = scanner.nextLine();
+                    usuarioOtros.remove(objetoEliminado);
+                }
+                break;
+            case 2:
+                if (!usuarioAnonimo.isEmpty()) {
+                    System.out.println("Ingrese el telefono que desea eliminar: ");
+                    objetoEliminado = scanner.nextLine();
+                    usuarioAnonimo.remove(objetoEliminado);
+                }
+
+                // Mostrar información de los otros usuarios
+                if (!usuarioOtros.isEmpty()) {
+                    System.out.println("Ingrese el telefono que desea eliminar: ");
+                    objetoEliminado = scanner.nextLine();
+                    usuarioOtros.remove(objetoEliminado);
+                }
+                break;
+            case 3:
+            if (!usuarioAnonimo.isEmpty()) {
+                System.out.println("Ingrese el correo que desea eliminar: ");
+                objetoEliminado = scanner.nextLine();
+                usuarioAnonimo.remove(objetoEliminado);
+            }
+
+            // Mostrar información de los otros usuarios
+            if (!usuarioOtros.isEmpty()) {
+                System.out.println("Ingrese el correo que desea eliminar: ");
+                objetoEliminado = scanner.nextLine();
+                usuarioOtros.remove(objetoEliminado);
+            }
+            if (!usuarioAnonimo.isEmpty()) {
+                System.out.println("Ingrese el telefono que desea eliminar: ");
+                objetoEliminado = scanner.nextLine();
+                usuarioAnonimo.remove(objetoEliminado);
+            }
+
+            // Mostrar información de los otros usuarios
+            if (!usuarioOtros.isEmpty()) {
+                System.out.println("Ingrese el telefono que desea eliminar: ");
+                objetoEliminado = scanner.nextLine();
+                usuarioOtros.remove(objetoEliminado);
+            }
+            break;
+            case 4:
+                System.out.println("Ingrese el ID del contenido que desea eliminar: ");
+                String idString = scanner.nextLine(); // Lee como String primero
+
+                if (!idString.matches("\\d+")) {
+                    throw new IllegalArgumentException("El ID contiene letras o caracteres no numéricos.");
+                }
+
+                // Convertir a int después de la validación
+                int contenidoEliminado = Integer.parseInt(idString);
+
+                if (contenidoEliminado >= 0 && contenidoEliminado < detalles.size()) {
+                    detalles.remove(contenidoEliminado); // Elimina el elemento en el índice dado
+                    System.out.println("Contenido eliminado correctamente.");
+                } else {
+                    System.out.println("ID no válido. El ID debe estar dentro de los límites de la lista.");
+                } break;
+            default:
+                System.out.println("Elija una opcion valida.");
+                break;
+        }
+
     }
 
 }
