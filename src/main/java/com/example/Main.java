@@ -1,8 +1,10 @@
 package com.example;
 
+// Importación de clases necesarias
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Clase principal que contiene toda la lógica del sistema
 public class Main {
     static ArrayList<String> peticionesDetalles = new ArrayList<>();
     static ArrayList<String> quejasDetalles = new ArrayList<>();
@@ -12,12 +14,14 @@ public class Main {
     static ArrayList<String> usuarioAnonimo = new ArrayList<>();
     static ArrayList<String> usuarioOtros = new ArrayList<>();
 
+    // Método principal que inicia el programa
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);// Escáner para leer entradas del usuario
         mostrarMenu(scanner);
-        scanner.close();
+        scanner.close();// Cierra el escáner
     }
 
+    // Método que muestra el menú principal
     static void mostrarMenu(Scanner scanner) {
         while (true) {
             System.out.println("\nSeleccione la sede a la cual desea realizar su PQRSF");
@@ -27,7 +31,7 @@ public class Main {
             System.out.println("3. Salir");
             System.out.println("--------------------------------");
 
-            int eleccion = obtenerOpcion(scanner, 3);
+            int eleccion = obtenerOpcion(scanner, 3); // Método que valida la opción seleccionada
 
             switch (eleccion) {
                 case 1 -> seleccionarTipoUsuario(scanner);
@@ -39,7 +43,7 @@ public class Main {
             }
         }
     }
-
+    // Método para seleccionar el tipo de usuario
     static void seleccionarTipoUsuario(Scanner scanner) {
         System.out.println("\nSeleccione tipo de usuario");
         System.out.println("--------------------------------");
@@ -49,7 +53,7 @@ public class Main {
         System.out.println("4. Volver a la selección de sede");
         System.out.println("--------------------------------");
 
-        int usuarioSeleccionado = obtenerOpcion(scanner, 4);
+        int usuarioSeleccionado = obtenerOpcion(scanner, 4); // Validar opción seleccionada
 
         switch (usuarioSeleccionado) {
             case 1 -> procesarUsuario(scanner, "Anónimo");
@@ -58,6 +62,7 @@ public class Main {
         }
     }
 
+    // Método que procesa un usuario y su PQRSF
     static void procesarUsuario(Scanner scanner, String tipoUsuario) {
         if (!aceptarPoliticaDatos(scanner))
             return;
@@ -70,6 +75,7 @@ public class Main {
         }
     }
 
+    // Método que solicita aceptar la política de manejo de datos
     static boolean aceptarPoliticaDatos(Scanner scanner) {
         System.out.println("\n¿Acepta la política de manejo de datos?");
         System.out.println("1. Sí");
@@ -79,11 +85,12 @@ public class Main {
 
         if (opcion == 2) {
             System.out.println("No es posible continuar.");
-            return false;
+            return false;// Si no acepta, se detiene el proceso
         }
         return true;
     }
 
+    // Método para seleccionar el tipo de PQRSF
     static String seleccionarTipoPQRSF(Scanner scanner) {
         System.out.println("\nSeleccione el tipo de PQRSF");
         System.out.println("--------------------------------");
@@ -96,6 +103,7 @@ public class Main {
 
         int opcion = obtenerOpcion(scanner, 5);
 
+        // Retorna los detalles de la PQRSF según la opción seleccionada
         return switch (opcion) {
             case 1 -> registrarDetalle(scanner, peticionesDetalles, "petición");
             case 2 -> registrarDetalle(scanner, quejasDetalles, "queja");
@@ -106,21 +114,26 @@ public class Main {
         };
     }
 
+    // Método para registrar detalles de una PQRSF
     static String registrarDetalle(Scanner scanner, ArrayList<String> lista, String tipo) {
         System.out.println("Por favor ingrese los detalles de su " + tipo + ":");
-        String detalle = scanner.nextLine();
-        lista.add(detalle);
-        return detalle;
+        String detalle = scanner.nextLine();// Leer los detalles ingresados
+        lista.add(detalle); // Agregar los detalles a la lista correspondiente
+        return detalle;// Retornar los detalles
     }
 
+    // Método para agregar un usuario anónimo con correo, teléfono y detalles.
     static void agregarUsuarioAnonimo(Scanner scanner, String detalles) {
         String correo = solicitarDato(scanner, "Correo: ", Main::validarCorreo);
         String telefono = solicitarDato(scanner, "Teléfono: ", Main::validarTelefono);
 
+        // Agrega la información del usuario anónimo a la lista
         usuarioAnonimo.add("Correo: " + correo + "\nTeléfono: " + telefono + "\nDetalles: " + detalles);
+        // Muestra la información ingresada
         mostrarInformacion("Anónimo", correo, telefono, detalles);
     }
 
+    // Método para agregar un usuario identificado (estudiante, egresado, docente, viditante u otros.)
     static void agregarUsuarioIdentificado(Scanner scanner, String detalles) {
         System.out.println("\nPor favor seleccione su tipo de usuario:");
         System.out.println("--------------------------------");
@@ -131,6 +144,8 @@ public class Main {
         System.out.println("--------------------------------");
 
         int opcion = obtenerOpcion(scanner, 4);
+
+        // Asocia la opción seleccionada con el tipo de usuario
         String tipoUsuario = switch (opcion) {
             case 1 -> "Estudiante";
             case 2 -> "Egresado";
@@ -144,11 +159,14 @@ public class Main {
         String correo = solicitarDato(scanner, "Correo: ", Main::validarCorreo);
         String telefono = solicitarDato(scanner, "Teléfono: ", Main::validarTelefono);
 
+        // Agrega la información del usuario identificado a la lista
         usuarioOtros.add("Usuario: " + tipoUsuario + "\nNombre: " + nombre + "\nCorreo: " + correo +
                 "\nTeléfono: " + telefono + "\nDetalles: " + detalles);
+        // Muestra la información ingresada
         mostrarInformacion(tipoUsuario, correo, telefono, detalles);
     }
 
+    
     static void mostrarInformacion(String tipoUsuario, String correo, String telefono, String detalles) {
         System.out.println("\nInformación ingresada:");
         System.out.println("Tipo de Usuario: " + tipoUsuario);
@@ -157,22 +175,24 @@ public class Main {
         System.out.println("Detalles: " + detalles);
     }
 
+    // Menú de administración para gestionar PQRSF y usuarios
     static void admin(Scanner scanner) {
-        String user = "User";
-        String password = "123456";
-        boolean accesoCorrecto = false;
-        int maximoIntentos = 3;
+        String user = "User";// Usuario de administrador
+        String password = "123456";// Contraseña de administrador
+        boolean accesoCorrecto = false;// Control de acceso
+        int maximoIntentos = 3;// Máximo de intentos para iniciar sesión
 
-        // Validar usuario y contraseña
+        // Ciclo para validar las credenciales de administrador
         while (!accesoCorrecto) {
             System.out.println("Por favor, inicie sesión");
-
+             // Intenta validar las credenciales con un máximo de intentos
             for (int intento = 1; intento <= maximoIntentos; intento++) {
                 System.out.print("Ingrese su Usuario: ");
                 String userName = scanner.nextLine();
                 System.out.print("Ingrese contraseña: ");
                 String passwordTry = scanner.nextLine();
 
+                // Valida las credenciales
                 if (user.equals(userName) && password.equals(passwordTry)) {
                     System.out.println("Acceso correcto");
                     accesoCorrecto = true;
@@ -187,8 +207,9 @@ public class Main {
             }
         }
 
-        boolean salir = false;
+        boolean salir = false;// Control para salir del menú
 
+        // Ciclo del menú de administrador
         while (!salir) {
             System.out.println("\n---- Menú de Administrador ----");
             System.out.println("1. Ver todas las PQRSF");
@@ -201,6 +222,7 @@ public class Main {
             System.out.println("8. Salir");
             System.out.println("----------------------------------");
 
+            // Solicita la opción seleccionada y valida entrada
             System.out.print("Seleccione una opción: ");
             if (!scanner.hasNextInt()) {
                 System.out.println("Entrada inválida. Ingrese un número entre 1 y 8.");
@@ -208,6 +230,7 @@ public class Main {
                 continue;
             }
 
+            // Procesa la opción seleccionada
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar el buffer
 
@@ -243,6 +266,7 @@ public class Main {
         }
     }
 
+    // Método para mostrar todas las PQRSF agrupadas por tipo
     static void mostrarTodasLasPQRSF() {
         System.out.println("\n--- Todas las PQRSF ---");
         mostrarLista("Peticiones", peticionesDetalles);
@@ -252,6 +276,7 @@ public class Main {
         mostrarLista("Felicitaciones", felicitacionesDetalles);
     }
 
+    // Método para mostrar PQRSF según el tipo seleccionado por el usuario
     static void mostrarPQRSFPorTipo(Scanner scanner) {
         System.out.println("\nSeleccione el tipo de PQRSF a visualizar:");
         System.out.println("--------------------------------");
@@ -272,6 +297,7 @@ public class Main {
         int opcion = scanner.nextInt();
         scanner.nextLine(); // Limpiar el buffer
 
+        // Selecciona el tipo de PQRSF a mostrar basado en la opción ingresada
         switch (opcion) {
             case 1:
                 mostrarLista("Peticiones", peticionesDetalles);
@@ -293,6 +319,7 @@ public class Main {
         }
     }
 
+    // Método para mostrar información de usuarios anónimos
     static void mostrarUsuariosAnonimos() {
         System.out.println("\n--- Usuarios Anónimos ---");
         if (usuarioAnonimo.isEmpty()) {
@@ -306,11 +333,13 @@ public class Main {
         }
     }
 
+    // Método para mostrar información de usuarios identificados
     static void mostrarUsuariosIdentificados() {
         System.out.println("\n--- Usuarios Identificados ---");
-        if (usuarioOtros.isEmpty()) {
+        if (usuarioOtros.isEmpty()) {// Verifica si la lista está vacía
             System.out.println("No hay usuarios identificados registrados.");
         } else {
+            // Itera sobre la lista y muestra la información de cada usuario
             for (String usuario : usuarioOtros) {
                 System.out.println("--------------------------------");
                 System.out.println(usuario);
@@ -319,6 +348,7 @@ public class Main {
         }
     }
 
+    // Método genérico para mostrar una lista de PQRSF por tipo
     static void mostrarLista(String tipo, ArrayList<String> lista) {
         System.out.println("\n--- " + tipo + " ---");
         if (lista.isEmpty()) {
@@ -330,7 +360,9 @@ public class Main {
         }
     }
 
+    // Método para eliminar todas las PQRSF y usuarios registrados
     static void eliminarTodasPQRSF() {
+        // Limpia todas las listas de PQRSF y usuarios
         peticionesDetalles.clear();
         quejasDetalles.clear();
         reclamosDetalles.clear();
@@ -341,14 +373,17 @@ public class Main {
         System.out.println("\nTodas las PQRSF y usuarios han sido eliminados.");
     }
 
+    // Método para eliminar una PQRSF específica de usuarios anónimos
     static void eliminarPQRSFPorIndiceAnonimo(Scanner scanner) {
         eliminarPorIndice(scanner, usuarioAnonimo, "Usuarios Anónimos");
     }
 
+    // Método para eliminar una PQRSF específica de usuarios identificados
     static void eliminarPQRSFPorIndiceOtros(Scanner scanner) {
         eliminarPorIndice(scanner, usuarioOtros, "Usuarios Identificados");
     }
 
+    // Método genérico para eliminar una PQRSF por su índice en una lista
     static void eliminarPorIndice(Scanner scanner, ArrayList<String> lista, String tipoUsuario) {
         
         if (lista.isEmpty()) {
@@ -358,37 +393,40 @@ public class Main {
         
 
         System.out.println("\n--- PQRSF de " + tipoUsuario + " ---");
+        // Muestra todas las PQRSF con índices
         for (int i = 0; i < lista.size(); i++) {
             System.out.println("--------------------------------");
             System.out.println((i + 1) + ". " + lista.get(i));
             System.out.println("--------------------------------");
         }
 
+
         System.out.print("\nIngrese el índice de la PQRSF a eliminar: ");
-        if (!scanner.hasNextInt()) {
+        if (!scanner.hasNextInt()) {// Verifica si la entrada no es un número
             System.out.println("Entrada inválida. Debe ingresar un número.");
             scanner.nextLine(); // Limpiar buffer
             return;
         }
 
-        int indice = scanner.nextInt() - 1;
+        int indice = scanner.nextInt() - 1;// Ajusta el índice a base 0
         scanner.nextLine(); // Limpiar buffer
 
-        if (indice >= 0 && indice < lista.size()) {
-            lista.remove(indice);
+        if (indice >= 0 && indice < lista.size()) { // Verifica que el índice sea válido
+            lista.remove(indice);// Elimina el elemento de la lista
             System.out.println("PQRSF eliminada exitosamente.");
         } else {
             System.out.println("Índice inválido.");
         }
     }
 
+    // Método para obtener una opción válida dentro de un rango determinado
     static int obtenerOpcion(Scanner scanner, int maxOpciones) {
         int opcion;
         do {
             System.out.print("Seleccione una opción: ");
-            while (!scanner.hasNextInt()) {
+            while (!scanner.hasNextInt()) { // Verifica si la entrada no es un número entero
                 System.out.println("Ingrese un número válido.");
-                scanner.next();
+                scanner.next(); // Descartar la entrada inválida
             }
             opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar buffer
@@ -412,22 +450,28 @@ public class Main {
         }
     }
 
+    // Método para validar un correo electrónico
     static void validarCorreo(String correo) {
+        // Verificar si el correo contiene el carácter '@'
         if (!correo.contains("@")) {
-            throw new IllegalArgumentException("El correo debe contener '@'.");
+            throw new IllegalArgumentException("El correo debe contener '@'.");// Lanza una excepción si no es válido
         }
     }
 
+    // Método para validar un número de teléfono
     static void validarTelefono(String telefono) {
+         // Verificar que el teléfono solo contenga dígitos
         if (!telefono.matches("\\d+")) {
-            throw new IllegalArgumentException("El teléfono debe ser numérico.");
+            throw new IllegalArgumentException("El teléfono debe ser numérico.");// Lanza una excepción si no es válido
         }
+         // Verificar que el teléfono tenga al menos 10 dígitos
         if (telefono.length() < 10) {
-            throw new IllegalArgumentException("El teléfono debe tener al menos 10 dígitos.");
+            throw new IllegalArgumentException("El teléfono debe tener al menos 10 dígitos."); // Lanza una excepción si no es válido
         }
     }
 
+    // Interfaz funcional que define un validador para entradas personalizadas
     interface Validador {
-        void validar(String input);
+        void validar(String input);// Método que valida una entrada
     }
 }
